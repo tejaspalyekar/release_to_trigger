@@ -1,7 +1,3 @@
-Here’s an updated description for the `modify.md` file for version 0.0.1, highlighting the key feature of triggering an action on release after a swipe gesture:
-
----
-
 ## 0.0.1 - Initial Release
 
 ### Features:
