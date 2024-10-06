@@ -1,33 +1,40 @@
-## 0.0.1
+## ReleaseToTrigger Package
 
-Features:
+### Version: 0.0.1
+
+---
+
+## Features
+
 This package provides an easy-to-use widget that allows developers to trigger custom actions when users pull from either the top or bottom of the screen, similar to 'pull-to-refresh' functionality. It's highly customizable and designed to handle both top and bottom swipe gestures. Here are the main features:
 
-Customizable Pull-to-Trigger Action:
+- **Customizable Pull-to-Trigger Action:**
+  - Define the action that occurs when the user pulls beyond a certain threshold and releases.
+  - Easily hook into the `onTrigger` callback to execute any custom logic after the pull gesture.
 
-Define the action that occurs when the user pulls beyond a certain threshold and releases.
-Easily hook into the onTrigger callback to execute any custom logic after the pull gesture.
-Pull Sensitivity:
+- **Pull Sensitivity:**
+  - The widget supports a `pullSensitivityHeight` parameter, which defines the region (from the top or bottom) where the pull-to-trigger effect will be active.
+  - The pull gesture will only be detected within this defined region, making it more user-friendly.
 
-The widget supports a pullSensitivityHeight parameter, which defines the region (from the top or bottom) where the pull-to-trigger effect will be active.
-The pull gesture will only be detected within this defined region, making it more user-friendly.
-Trigger from Top or Bottom:
+- **Trigger from Top or Bottom:**
+  - The widget provides the flexibility to allow pulling from either the top or bottom of the screen. 
+  - The `top` boolean parameter defines whether the action will be triggered from the top (default) or the bottom.
 
-The widget provides the flexibility to allow pulling from either the top or bottom of the screen.
-The top boolean parameter defines whether the action will be triggered from the top (default) or the bottom.
-Pull Progress Feedback:
+- **Pull Progress Feedback:**
+  - Visual feedback of the pull progress is shown to users with a `CircularProgressIndicator`, reflecting how close the user is to triggering the action.
+  - Customize the progress indicator with `progressColor`, and change the background color of the pull effect using `backgroundColor`.
 
-Visual feedback of the pull progress is shown to users with a CircularProgressIndicator, reflecting how close the user is to triggering the action.
-Customize the progress indicator with progressColor, and change the background color of the pull effect using backgroundColor.
-Customizable Status Text:
+- **Customizable Status Text:**
+  - Define the text to display while pulling with the `initialText` property, and change the text after the pull threshold is crossed with the `triggeredText` property.
 
-Define the text to display while pulling with the initialText property, and change the text after the pull threshold is crossed with the triggeredText property.
-Custom Threshold for Triggering:
+- **Custom Threshold for Triggering:**
+  - Set a custom threshold height using the `triggerHeight` property to control how much the user needs to pull before the action is triggered.
+  
+---
 
-Set a custom threshold height using the triggerHeight property to control how much the user needs to pull before the action is triggered.
-Example Usage
-dart
-Copy code
+### Example Usage
+
+```dart
 ReleaseToTrigger(
   top: true, // Set to false to trigger from the bottom
   backgroundColor: Colors.teal, // Background color for the pull effect
@@ -46,29 +53,48 @@ ReleaseToTrigger(
     ),
   ),
 );
+```
 
-Parameters:
-backgroundColor (Color): Sets the background color of the pull container. Defaults to Colors.blueAccent.
+---
 
-progressColor (Color): Color of the CircularProgressIndicator shown during the pull gesture. Defaults to Colors.white.
+### Parameters:
 
-initialText (String): The text displayed while the user is pulling but has not yet reached the threshold. Defaults to 'Swipe to trigger'.
+- `backgroundColor` *(Color)*: Sets the background color of the pull container. Defaults to `Colors.blueAccent`.
+  
+- `progressColor` *(Color)*: Color of the `CircularProgressIndicator` shown during the pull gesture. Defaults to `Colors.white`.
+  
+- `initialText` *(String)*: The text displayed while the user is pulling but has not yet reached the threshold. Defaults to `'Swipe to trigger'`.
+  
+- `triggeredText` *(String)*: The text displayed when the user has pulled beyond the threshold and should release to trigger the action. Defaults to `'Release to trigger action'`.
+  
+- `triggerHeight` *(double)*: Defines the height the user must pull before the action is triggered. Defaults to `100.0`.
+  
+- `pullSensitivityHeight` *(double)*: Height limit from the top/bottom of the screen where the pull gesture can be detected. Defaults to `100.0`.
+  
+- `top` *(bool)*: Determines if the pull-to-trigger effect should appear at the top (`true`) or the bottom (`false`). Defaults to `true`.
 
-triggeredText (String): The text displayed when the user has pulled beyond the threshold and should release to trigger the action. Defaults to 'Release to trigger action'.
+- `onTrigger` *(Function)*: A required callback function that gets executed when the user pulls beyond the threshold and releases.
+  
+- `child` *(Widget)*: The main content of the app that will be displayed, wrapped by the `ReleaseToTrigger` widget.
 
-triggerHeight (double): Defines the height the user must pull before the action is triggered. Defaults to 100.0.
+---
 
-pullSensitivityHeight (double): Height limit from the top/bottom of the screen where the pull gesture can be detected. Defaults to 100.0.
+### How It Works:
 
-top (bool): Determines if the pull-to-trigger effect should appear at the top (true) or the bottom (false). Defaults to true.
+1. **Drag Start:** When the user starts pulling within the `pullSensitivityHeight` (either from the top or bottom), the widget tracks the drag offset and progress.
+   
+2. **Progress Display:** As the user continues to pull, the `CircularProgressIndicator` reflects the current progress, and the status text changes if the threshold is crossed.
 
-onTrigger (Function): A required callback function that gets executed when the user pulls beyond the threshold and releases.
+3. **Action Trigger:** If the user pulls past the `triggerHeight` and releases, the `onTrigger` callback is executed, allowing custom actions (e.g., refreshing content, loading more data) to be performed.
 
-child (Widget): The main content of the app that will be displayed, wrapped by the ReleaseToTrigger widget.
+---
 
-How It Works:
-Drag Start: When the user starts pulling within the pullSensitivityHeight (either from the top or bottom), the widget tracks the drag offset and progress.
+### Planned Improvements:
 
-Progress Display: As the user continues to pull, the CircularProgressIndicator reflects the current progress, and the status text changes if the threshold is crossed.
+- Horizontal pull support.
+- Adding more animation customization for the pull and release actions.
+- Improved handling of edge cases like fast pulls and swipes.
 
-Action Trigger: If the user pulls past the triggerHeight and releases, the onTrigger callback is executed, allowing custom actions (e.g., refreshing content, loading more data) to be performed.
+---
+
+This is the initial release (version 0.0.1) of the `release_to_trigger` package, with essential features for handling pull-to-trigger gestures and customizable feedback.
