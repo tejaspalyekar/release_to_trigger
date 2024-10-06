@@ -1,55 +1,35 @@
-## ReleaseToTrigger Package
-
-### Version: 0.0.1
+Here’s an updated description for the `modify.md` file for version 0.0.1, highlighting the key feature of triggering an action on release after a swipe gesture:
 
 ---
 
-## Features
+## 0.0.1 - Initial Release
 
-This package provides an easy-to-use widget that allows developers to trigger custom actions when users pull from either the top or bottom of the screen, similar to 'pull-to-refresh' functionality. It's highly customizable and designed to handle both top and bottom swipe gestures. Here are the main features:
-
-- **Customizable Pull-to-Trigger Action:**
-  - Define the action that occurs when the user pulls beyond a certain threshold and releases.
-  - Easily hook into the `onTrigger` callback to execute any custom logic after the pull gesture.
-
-- **Pull Sensitivity:**
-  - The widget supports a `pullSensitivityHeight` parameter, which defines the region (from the top or bottom) where the pull-to-trigger effect will be active.
-  - The pull gesture will only be detected within this defined region, making it more user-friendly.
-
-- **Trigger from Top or Bottom:**
-  - The widget provides the flexibility to allow pulling from either the top or bottom of the screen. 
-  - The `top` boolean parameter defines whether the action will be triggered from the top (default) or the bottom.
-
-- **Pull Progress Feedback:**
-  - Visual feedback of the pull progress is shown to users with a `CircularProgressIndicator`, reflecting how close the user is to triggering the action.
-  - Customize the progress indicator with `progressColor`, and change the background color of the pull effect using `backgroundColor`.
-
-- **Customizable Status Text:**
-  - Define the text to display while pulling with the `initialText` property, and change the text after the pull threshold is crossed with the `triggeredText` property.
-
-- **Custom Threshold for Triggering:**
-  - Set a custom threshold height using the `triggerHeight` property to control how much the user needs to pull before the action is triggered.
+### Features:
+- **Release to Trigger Action**: A Flutter widget designed to capture vertical swipe gestures and trigger a custom action when the user releases the swipe at a defined height. Ideal for refreshing content, loading actions, or any custom user interaction.
+- **Configurable Sensitivity**: Customize the height sensitivity for detecting a swipe (both at the top or bottom of the screen), allowing you to control how much the user must pull before the action is triggered.
+- **Top and Bottom Swipes**: Control whether the gesture triggers from the top or bottom of the screen using the `top` parameter.
+- **Swipe Progress Indicator**: A circular progress indicator shows swipe progress in real-time, dynamically adjusting based on the distance the user has pulled.
+- **Customizable Design**: Parameters for customizing colors, background, and text (e.g., `initialText` and `triggeredText`) for a personalized look and feel.
+- **Callback on Trigger**: Execute any custom functionality by providing a callback via the `onTrigger` parameter, allowing developers to integrate custom actions seamlessly.
   
----
-
-### Example Usage
+### Example Usage:
+- Set up an interactive swipe action to load content, perform tasks, or refresh data when the user pulls and releases at a certain point.
 
 ```dart
 ReleaseToTrigger(
-  top: true, // Set to false to trigger from the bottom
-  backgroundColor: Colors.teal, // Background color for the pull effect
-  progressColor: Colors.amber, // Color of the progress indicator
-  initialText: 'Pull down to refresh', // Text while pulling
-  triggeredText: 'Release to refresh', // Text once the pull threshold is reached
-  triggerHeight: 150.0, // Height the user must pull to trigger the action
-  pullSensitivityHeight: 150.0, // Active pull area sensitivity
+  top: false,  // Trigger from the bottom
+  backgroundColor: Colors.teal,
+  progressColor: Colors.amber,
+  initialText: 'Pull to load something cool',
+  triggeredText: 'Release to see magic',
+  triggerHeight: 150.0,  // Trigger action when 150px is pulled
   onTrigger: () {
-    print("Action triggered");
+    print("Trigger action executed!");
   },
   child: Container(
     color: Colors.white,
-    child: const Center(
-      child: Text("Main content of the app"),
+    child: Center(
+      child: Text("Swipe down to interact"),
     ),
   ),
 );
