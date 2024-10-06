@@ -1,7 +1,7 @@
 name: release_to_trigger
 description: "A highly customizable Flutter package that triggers an action when the user pulls down from the top or pulls up from the bottom of the screen and releases it. Similar to Instagram's 'Swipe Up' functionality, this package allows developers to customize the pull threshold, progress indicator, colors, and trigger text. Ideal for implementing features like 'pull to refresh' or 'load more' actions."
 version: 0.0.1
-homepage: https://github.com/your-repo-link
+homepage: https://github.com/tejaspalyekar/release_to_trigger
 
 environment:
   sdk: '>=3.4.3 <4.0.0'
