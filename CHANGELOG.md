@@ -1,6 +1,6 @@
 ## ReleaseToTrigger Package
 
-## 0.0.1 - Initial Release
+## 0.0.2 - Initial Release
 
 ### Features:
 - **Release to Trigger Action**: A Flutter widget designed to capture vertical swipe gestures and trigger a custom action when the user releases the swipe at a defined height. Ideal for refreshing content, loading actions, or any custom user interaction.
