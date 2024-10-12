@@ -6,6 +6,10 @@ class ReleaseToTrigger extends StatefulWidget {
   final String initialText;
   final String triggeredText;
   final double triggerHeight;
+
+  final bool showProgressIndicator;
+  final TextStyle initialTextStyle;
+  final TextStyle triggerTextStyle;
   final double pullSensitivityHeight; // Height limit for pull sensitivity
   final bool top; // Control whether the animation is at the top or bottom
   final Function onTrigger;
@@ -13,13 +17,18 @@ class ReleaseToTrigger extends StatefulWidget {
 
   const ReleaseToTrigger({
     super.key,
-    this.backgroundColor = Colors.blueAccent,
+    this.backgroundColor = Colors.transparent,
     this.progressColor = Colors.white,
     this.initialText = 'Swipe to trigger',
     this.triggeredText = 'Release to trigger action',
-    this.triggerHeight = 100.0,
-    this.pullSensitivityHeight = 100.0, // Default sensitive height
+    this.triggerHeight = 250.0,
+    this.pullSensitivityHeight = 250.0, // Default sensitive height
+    this.initialTextStyle = const TextStyle(
+        fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold),
+    this.triggerTextStyle = const TextStyle(
+        fontSize: 12, color: Colors.red, fontWeight: FontWeight.bold),
     this.top = true, // By default, the pull effect appears at the top
+    this.showProgressIndicator = true,
     required this.onTrigger, // Developer's custom action callback
     required this.child,
   });
@@ -143,21 +152,22 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Circular progress indicator that reflects swipe progress
-            CircularProgressIndicator(
-              value: _progress,
-              valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
-              backgroundColor: widget.progressColor.withOpacity(0.3),
-              strokeWidth: 6,
-            ),
+            widget.showProgressIndicator
+                ? CircularProgressIndicator(
+                    value: _progress,
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(widget.progressColor),
+                    backgroundColor: widget.progressColor.withOpacity(0.3),
+                    strokeWidth: 6,
+                  )
+                : const SizedBox(),
             const SizedBox(height: 20),
             // Status text
             Text(
               _statusText,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
+              style: _statusText == widget.triggeredText
+                  ? widget.triggerTextStyle
+                  : widget.initialTextStyle,
             ),
           ],
         ),
@@ -183,21 +193,22 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
               widget.top ? MainAxisAlignment.center : MainAxisAlignment.start,
           children: [
             // Circular progress indicator that reflects swipe progress
-            CircularProgressIndicator(
-              value: _progress,
-              valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
-              backgroundColor: widget.progressColor.withOpacity(0.3),
-              strokeWidth: 6,
-            ),
+            widget.showProgressIndicator
+                ? CircularProgressIndicator(
+                    value: _progress,
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(widget.progressColor),
+                    backgroundColor: widget.progressColor.withOpacity(0.3),
+                    strokeWidth: 6,
+                  )
+                : const SizedBox(),
             const SizedBox(height: 20),
             // Status text
             Text(
               _statusText,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
+              style: _statusText == widget.triggeredText
+                  ? widget.triggerTextStyle
+                  : widget.initialTextStyle,
             ),
           ],
         ),

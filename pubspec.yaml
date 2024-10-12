@@ -4,6 +4,13 @@ version: 0.0.2
 homepage: https://github.com/tejaspalyekar/release_to_trigger
 repository: https://github.com/tejaspalyekar/release_to_trigger
 license: MIT
+topics:
+  - trigger
+  - action
+  - pull
+  - release
+  - release-to-trigger
+  
 environment:
   sdk: '>=3.4.3 <4.0.0'
   flutter: ">=1.17.0"
