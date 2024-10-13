@@ -1,3 +1,15 @@
+## 0.0.9
+
+- **Format According to pub.dev rules**: solve ib/release_to_trigger.dart doesn't match the Dart formatter.
+  
+## 0.0.8
+
+- **Format According to pub.dev rules**: solve ib/release_to_trigger.dart doesn't match the Dart formatter.
+  
+## 0.0.7
+
+- **Update package description**: package description updated.
+  
 ## 0.0.6
 
 - **Update package description**: package description updated.

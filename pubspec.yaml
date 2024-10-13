@@ -1,6 +1,6 @@
 name: release_to_trigger
-description: "release_to_trigger is a Flutter package for capturing vertical swipes and triggering actions, ideal for custom trigger actions like loading new content or activating specific app features."
-version: 0.0.6
+description: "release_to_trigger is a Flutter package for capturing vertical swipes and triggering actions, perfect for custom triggers like loading new content or activating app features"
+version: 0.0.9
 homepage: https://github.com/tejaspalyekar/release_to_trigger
 repository: https://github.com/tejaspalyekar/release_to_trigger
 license: MIT
