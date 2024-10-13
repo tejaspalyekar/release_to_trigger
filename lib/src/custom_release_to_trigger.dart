@@ -73,9 +73,9 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
         }
       },
       onVerticalDragUpdate: (details) {
-        if (!_withinSensitivity)
+        if (!_withinSensitivity) {
           return; // Ignore if drag starts outside sensitivity area
-
+        }
         setState(() {
           // Only start showing the pull effect if the user has dragged more than the threshold
           if (details.delta.dy.abs() > _dragThreshold || _isDragging) {
