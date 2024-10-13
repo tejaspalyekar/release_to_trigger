@@ -1,3 +1,7 @@
+## 0.0.4
+
+- **Update readme**: reame.md file updated.
+  
 ## 0.0.3
 
 - **Example added**: For better understanding example code added.

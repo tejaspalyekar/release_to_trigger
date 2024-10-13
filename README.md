@@ -15,6 +15,17 @@ A Flutter widget designed to capture vertical swipe gestures and trigger custom 
 
 ---
 
+
+## Screenshots
+
+Here are some screenshots demonstrating the `ReleaseToTrigger` in action:
+
+| Initial State                                  | Triggered State                                 |
+|------------------------------------------------|-------------------------------------------------|
+| ![Initial State](screenshots/1.png)            | ![Triggered State](screenshots/2.png)           |
+
+---
+
 ## Installation
 
 Add this package to your `pubspec.yaml` file:
@@ -75,18 +86,6 @@ Here is an example demonstrating how to use the `ReleaseToTrigger` widget in you
 1. **Pull Start**: When the user begins pulling within the specified sensitivity area, the swipe is detected and tracked.
 2. **Progress Indicator**: A circular progress indicator adjusts dynamically as the user pulls closer to the trigger height.
 3. **Trigger**: Upon reaching the trigger height and releasing, the `onTrigger` callback is executed, allowing you to perform any custom action.
-
----
-
-
-## Screenshots
-
-Here are some screenshots demonstrating the `ReleaseToTrigger` in action:
-![1](https://github.com/user-attachments/assets/8fefe5f2-3861-4653-a4e4-7ce96f21eed4)
-
-| Initial State                                  | Triggered State                                 |
-|------------------------------------------------|-------------------------------------------------|
-| ![Initial State](https://github.com/tejaspalyekar/release_to_trigger/blob/main/screenshots/1.png)            | ![Triggered State](screenshots/2.png)           |
 
 ---
 
