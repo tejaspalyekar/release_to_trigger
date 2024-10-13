@@ -1,3 +1,7 @@
+## 0.0.5
+
+- **Update readme**: reame.md file updated.
+
 ## 0.0.4
 
 - **Update readme**: reame.md file updated.
