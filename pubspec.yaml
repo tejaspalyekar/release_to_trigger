@@ -1,6 +1,6 @@
 name: release_to_trigger
-description: "release_to_trigger is a powerful Flutter widget designed to capture vertical swipe gestures and trigger custom actions when users pull and release the swipe at a defined height. With support for both top and bottom swipe gestures, it’s perfect for building interactive UIs, pull-to-refresh controls, or custom trigger actions like loading new content or activating specific app features"
-version: 0.0.5
+description: "release_to_trigger is a Flutter package for capturing vertical swipes and triggering actions, ideal for custom trigger actions like loading new content or activating specific app features."
+version: 0.0.6
 homepage: https://github.com/tejaspalyekar/release_to_trigger
 repository: https://github.com/tejaspalyekar/release_to_trigger
 license: MIT

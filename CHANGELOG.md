@@ -1,3 +1,7 @@
+## 0.0.6
+
+- **Update package description**: package description updated.
+
 ## 0.0.5
 
 - **Update readme**: reame.md file updated.
