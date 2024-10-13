@@ -1,4 +1,4 @@
-# release_to_trigger
+# **`release_to_trigger`**
 
 A Flutter widget designed to capture vertical swipe gestures and trigger custom actions when a user releases the swipe at a defined height. Perfect for refreshing content, loading actions, or adding interactive functionality with a smooth user experience.
 
