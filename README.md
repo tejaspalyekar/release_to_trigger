@@ -1,110 +1,117 @@
-# **`release_to_trigger`**
+# **`ReleaseToTrigger`**
 
-A Flutter widget designed to capture vertical swipe gestures and trigger custom actions when a user releases the swipe at a defined height. Perfect for refreshing content, loading actions, or adding interactive functionality with a smooth user experience.
-
----
-
-## Features
-
-- **Release to Trigger Action**: Trigger an action when a user pulls down or up to a specified height.
-- **Configurable Sensitivity**: Customize the height threshold for swipes and control how far the user must pull before triggering the action.
-- **Top and Bottom Swipe Support**: You can choose to detect swipes from the top or the bottom of the screen.
-- **Swipe Progress Indicator**: Real-time progress feedback with a customizable circular progress indicator.
-- **Customizable Look and Feel**: Parameters for setting background colors, text, and progress colors.
-- **Callback on Trigger**: Integrate custom functionality seamlessly with a callback function that executes when the user releases at the trigger point.
+**`ReleaseToTrigger`** is a highly customizable Flutter widget that captures vertical swipe gestures and triggers actions upon release at a defined threshold. Ideal for enhancing user experiences with pull-to-refresh, content loading, or any custom interactive feature.
 
 ---
 
+## 🌟 Features
 
-## Screenshots
-
-Here are some screenshots demonstrating the `ReleaseToTrigger` in action:
-
-| Initial State                                  | Triggered State                                 |
-|------------------------------------------------|-------------------------------------------------|
-| ![Initial State](screenshots/1.png)            | ![Triggered State](screenshots/2.png)           |
+- **Swipe to Trigger Actions**: Capture vertical swipe gestures and trigger actions when the user releases the swipe at a defined height.
+- **Fully Customizable**: Modify the look and feel with adjustable background colors, progress indicators, and texts.
+- **Two-Way Swipe Support**: Detect swipe gestures from both the top and bottom of the screen.
+- **Real-Time Progress Feedback**: Keep users informed with a responsive, circular progress indicator as they swipe.
+- **Smooth Integration**: Trigger your custom actions via a callback when the defined swipe threshold is reached.
+- **Adaptive Sensitivity**: Fine-tune how far the user must swipe to activate the trigger.
 
 ---
 
-## Installation
+## 📸 Screenshots
 
-Add this package to your `pubspec.yaml` file:
+Here’s how `ReleaseToTrigger` works in action:
+
+| Initial State                                    | Triggered State                                   |
+|--------------------------------------------------|---------------------------------------------------|
+| ![Initial State](screenshots/1.png)              | ![Triggered State](screenshots/2.png)             |
+
+---
+
+## 🚀 Getting Started
+
+### Installation
+
+Add the `release_to_trigger` package to your project by including it in your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   release_to_trigger: ^0.0.2
 ```
 
-Then, run `flutter pub get` to install it.
+Then, run the following command to install it:
 
----
-
-## Example Usage
-
-Here is an example demonstrating how to use the `ReleaseToTrigger` widget in your app to unlock motivational quotes with a swipe gesture.
- ReleaseToTrigger(
-        backgroundColor: Colors.green.withOpacity(0.2),
-        progressColor: Colors.green,
-        initialText: 'Pull down to unlock the surprise',
-        triggeredText: 'Release to reveal the surprise!',
-        triggerHeight: 250.0,
-        pullSensitivityHeight: 250,
-        onTrigger: () {
-          Navigator.of(context).push(ModalBottomSheetRoute(
-              useSafeArea: true,
-              showDragHandle: true,
-              builder: (context) => const SizedBox(
-                    child: Center(
-                      child: Text("Action Triggered"),
-                    ),
-                  ),
-              isScrollControlled: true));
-        },
-        child: const Text("release to trigger example"),
-      ),
+```bash
+flutter pub get
 ```
 
 ---
 
-## Parameters
+## 🔧 Example Usage
 
-- `backgroundColor` *(Color)*: The background color of the pull container.
-- `progressColor` *(Color)*: Color of the circular progress indicator.
-- `initialText` *(String)*: Text shown while pulling but before reaching the trigger height.
-- `triggeredText` *(String)*: Text displayed when the user crosses the threshold and should release.
-- `triggerHeight` *(double)*: Height in pixels the user must pull before triggering the action.
-- `pullSensitivityHeight` *(double)*: Height limit where the pull gesture is detected.
-- `top` *(bool)*: Whether to trigger from the top (`true`) or bottom (`false`).
-- `onTrigger` *(Function)*: Callback function to execute when the user pulls and releases at the trigger height.
-- `child` *(Widget)*: The main widget or content of your screen, wrapped by the `ReleaseToTrigger` widget.
-- `initialTextColor` *(TextStyle)*: style initial text according to your need.
-- `triggerTextStyle` *(TextStyle)*: style trigger text according to your need.
----
+Here’s a quick example to show how `ReleaseToTrigger` can be implemented in your app for an interactive swipe action:
 
-## How It Works
-
-1. **Pull Start**: When the user begins pulling within the specified sensitivity area, the swipe is detected and tracked.
-2. **Progress Indicator**: A circular progress indicator adjusts dynamically as the user pulls closer to the trigger height.
-3. **Trigger**: Upon reaching the trigger height and releasing, the `onTrigger` callback is executed, allowing you to perform any custom action.
-
----
-
-## Planned Improvements
-
-- **Horizontal Swipe Support**: Add support for horizontal swipe gestures.
-- **Animations**: Add more customization for the pull and release animations.
-- **Advanced Handling**: Handle fast swipes and other edge cases more gracefully.
-
----
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```dart
+ReleaseToTrigger(
+  backgroundColor: Colors.green.withOpacity(0.2),
+  progressColor: Colors.green,
+  initialText: 'Pull down to unlock the surprise',
+  triggeredText: 'Release to reveal the surprise!',
+  triggerHeight: 250.0,
+  pullSensitivityHeight: 250,
+  onTrigger: () {
+    // Your custom action here
+    Navigator.of(context).push(
+      ModalBottomSheetRoute(
+        useSafeArea: true,
+        showDragHandle: true,
+        builder: (context) => const Center(
+          child: Text("Action Triggered"),
+        ),
+      ),
+    );
+  },
+  child: const Text("Swipe to trigger example"),
+);
+```
 
 ---
 
-This is the initial release (version 0.0.2) of the `release_to_trigger` package, packed with essential features for handling swipe gestures with customizable progress feedback.
+## ⚙️ Parameters
+
+- **`backgroundColor`** *(Color)*: Sets the background color for the pull container.
+- **`progressColor`** *(Color)*: Color of the circular progress indicator.
+- **`initialText`** *(String)*: Text shown during the pull before reaching the trigger height.
+- **`triggeredText`** *(String)*: Text displayed when the user reaches the trigger threshold.
+- **`triggerHeight`** *(double)*: The height (in pixels) that must be reached before triggering the action.
+- **`pullSensitivityHeight`** *(double)*: Sensitivity of the pull gesture.
+- **`top`** *(bool)*: Whether to trigger from the top (`true`) or bottom (`false`) of the screen.
+- **`onTrigger`** *(Function)*: Callback function executed when the trigger height is reached and the user releases.
+- **`child`** *(Widget)*: The main widget content wrapped by `ReleaseToTrigger`.
+- **`initialTextColor`** *(TextStyle)*: Customizable style for the initial pull text.
+- **`triggerTextStyle`** *(TextStyle)*: Customizable style for the triggered text.
 
 ---
 
-Let me know if you'd like any adjustments or if you need help creating a demo video!
+## 💡 How It Works
+
+1. **Detect Pull Gestures**: The widget detects the user’s pull gestures and tracks progress based on the swipe height.
+2. **Interactive Feedback**: A progress indicator updates in real-time as the user approaches the trigger point.
+3. **Trigger Actions**: When the user reaches the trigger height and releases, the specified action is executed via the callback.
+
+---
+
+## 📈 Planned Features
+
+- **Horizontal Swipe Detection**: Expanding functionality to support horizontal swipes.
+- **Animation Enhancements**: Further customization of pull and release animations.
+- **Edge Case Handling**: More robust support for fast and complex swipe gestures.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+Feel free to reach out for feedback!
+
+---
