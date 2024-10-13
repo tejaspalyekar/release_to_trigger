@@ -85,7 +85,7 @@ Here are some screenshots demonstrating the `ReleaseToTrigger` in action:
 
 | Initial State                                  | Triggered State                                 |
 |------------------------------------------------|-------------------------------------------------|
-| ![Initial State](screenshots/1.png)            | ![Triggered State](screenshots/2.png)           |
+| ![Initial State](https://github.com/tejaspalyekar/release_to_trigger/blob/main/screenshots/1.png)            | ![Triggered State](screenshots/2.png)           |
 
 ---
 
