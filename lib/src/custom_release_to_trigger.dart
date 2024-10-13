@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
 class ReleaseToTrigger extends StatefulWidget {
-  final Color backgroundColor;
-  final Color progressColor;
-  final String initialText;
-  final String triggeredText;
-  final double triggerHeight;
+  final Color? backgroundColor;
+  final Color? progressColor;
+  final String? initialText;
+  final String? triggeredText;
+  final double? triggerHeight;
 
-  final bool showProgressIndicator;
-  final TextStyle initialTextStyle;
-  final TextStyle triggerTextStyle;
-  final double pullSensitivityHeight; // Height limit for pull sensitivity
-  final bool top; // Control whether the animation is at the top or bottom
+  final bool? showProgressIndicator;
+  final TextStyle? initialTextStyle;
+  final TextStyle? triggerTextStyle;
+  final double? pullSensitivityHeight; // Height limit for pull sensitivity
+  final bool? top; // Control whether the animation is at the top or bottom
   final Function onTrigger;
   final Widget child;
 
   const ReleaseToTrigger({
     super.key,
     this.backgroundColor = Colors.transparent,
-    this.progressColor = Colors.white,
+    this.progressColor = Colors.blue,
     this.initialText = 'Swipe to trigger',
     this.triggeredText = 'Release to trigger action',
     this.triggerHeight = 250.0,
@@ -26,7 +26,7 @@ class ReleaseToTrigger extends StatefulWidget {
     this.initialTextStyle = const TextStyle(
         fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold),
     this.triggerTextStyle = const TextStyle(
-        fontSize: 12, color: Colors.red, fontWeight: FontWeight.bold),
+        fontSize: 12, color: Colors.blue, fontWeight: FontWeight.bold),
     this.top = true, // By default, the pull effect appears at the top
     this.showProgressIndicator = true,
     required this.onTrigger, // Developer's custom action callback
@@ -52,7 +52,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
   @override
   void initState() {
     super.initState();
-    _statusText = widget.initialText;
+    _statusText = widget.initialText ?? "Swipe to trigger";
   }
 
   @override
@@ -60,36 +60,38 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
     return GestureDetector(
       onVerticalDragStart: (details) {
         // Detect if the drag starts within the pull sensitivity area
-        if (details.globalPosition.dy <= widget.pullSensitivityHeight &&
-            widget.top) {
+        if (details.globalPosition.dy <=
+                (widget.pullSensitivityHeight ?? 250) &&
+            (widget.top ?? true)) {
           _withinSensitivity = true; // Start dragging from the top
         } else if (details.globalPosition.dy >=
                 MediaQuery.of(context).size.height -
-                    widget.pullSensitivityHeight &&
-            !widget.top) {
+                    (widget.pullSensitivityHeight ?? 250) &&
+            !(widget.top ?? true)) {
           _withinSensitivity = true; // Start dragging from the bottom
         } else {
           _withinSensitivity = false; // Ignore drag outside sensitivity area
         }
       },
       onVerticalDragUpdate: (details) {
-        if (!_withinSensitivity)
+        if (!_withinSensitivity) {
           return; // Ignore if drag starts outside sensitivity area
+        }
 
         setState(() {
           // Only start showing the pull effect if the user has dragged more than the threshold
           if (details.delta.dy.abs() > _dragThreshold || _isDragging) {
             _isDragging = true;
             _dragOffset += details.delta.dy;
-            _progress = (_dragOffset.abs() / widget.triggerHeight)
+            _progress = (_dragOffset.abs() / (widget.triggerHeight ?? 250))
                 .clamp(0.0, 1.0); // Progress between 0 and 1
 
             // Update status based on the current drag position
-            if (_dragOffset.abs() >= widget.triggerHeight) {
-              _statusText = widget.triggeredText;
+            if (_dragOffset.abs() >= widget.triggerHeight!) {
+              _statusText = widget.triggeredText ?? "Release to trigger action";
               _triggered = true;
             } else {
-              _statusText = widget.initialText;
+              _statusText = widget.initialText ?? "Swipe to trigger";
               _triggered = false;
             }
           }
@@ -98,13 +100,13 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
       onVerticalDragEnd: (details) {
         if (_withinSensitivity &&
             _triggered &&
-            _dragOffset.abs() >= widget.triggerHeight) {
+            _dragOffset.abs() >= widget.triggerHeight!) {
           widget.onTrigger(); // Trigger developer's custom action
         }
         setState(() {
           _dragOffset = 0.0;
           _progress = 0.0; // Reset progress
-          _statusText = widget.initialText;
+          _statusText = widget.initialText ?? "Swipe to trigger";
           _isDragging = false; // Reset dragging state
           _withinSensitivity = false; // Reset sensitivity state
         });
@@ -115,7 +117,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
             child: widget.child, // Take the full screen
           ),
           // Pull container for top drag
-          if (widget.top)
+          if (widget.top ?? true)
             Positioned(
               top: 0,
               left: 0,
@@ -123,7 +125,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
               child: _buildPullContainer(),
             ),
           // Pull container for bottom drag
-          if (!widget.top)
+          if (!(widget.top ?? true))
             Positioned(
               bottom: 0,
               left: 0,
@@ -141,35 +143,39 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       height: _isDragging
-          ? _dragOffset.abs().clamp(
-              0.0, widget.triggerHeight) // Limit the height to triggerHeight
+          ? _dragOffset.abs().clamp(0.0,
+              widget.triggerHeight ?? 250) // Limit the height to triggerHeight
           : 0.0, // When not dragging, height should be 0
       color: widget.backgroundColor,
       alignment: Alignment.center,
       child: Visibility(
         visible: _isDragging,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Circular progress indicator that reflects swipe progress
-            widget.showProgressIndicator
-                ? CircularProgressIndicator(
-                    value: _progress,
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(widget.progressColor),
-                    backgroundColor: widget.progressColor.withOpacity(0.3),
-                    strokeWidth: 6,
-                  )
-                : const SizedBox(),
-            const SizedBox(height: 20),
-            // Status text
-            Text(
-              _statusText,
-              style: _statusText == widget.triggeredText
-                  ? widget.triggerTextStyle
-                  : widget.initialTextStyle,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Circular progress indicator that reflects swipe progress
+              widget.showProgressIndicator ?? true
+                  ? CircularProgressIndicator(
+                      value: _progress,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          widget.progressColor ?? Colors.white),
+                      backgroundColor: widget.progressColor != null
+                          ? widget.progressColor!.withOpacity(0.3)
+                          : Colors.white.withOpacity(0.3),
+                      strokeWidth: 6,
+                    )
+                  : const SizedBox(),
+              const SizedBox(height: 20),
+              // Status text
+              Text(
+                _statusText,
+                style: _statusText == widget.triggeredText
+                    ? widget.triggerTextStyle
+                    : widget.initialTextStyle,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -178,27 +184,30 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
   // For bottom drag container
   Widget _buildBottomPullContainer() {
     return AnimatedContainer(
-      padding: EdgeInsets.only(top: widget.top ? 0 : 20),
+      padding: EdgeInsets.only(top: widget.top ?? true ? 0 : 20),
       duration: const Duration(milliseconds: 300),
       height: _isDragging
-          ? _dragOffset.abs().clamp(
-              0.0, widget.triggerHeight) // Limit the height to triggerHeight
+          ? _dragOffset.abs().clamp(0.0,
+              widget.triggerHeight ?? 250) // Limit the height to triggerHeight
           : 0.0, // When not dragging, height should be 0
       color: widget.backgroundColor,
       alignment: Alignment.bottomCenter, // Align to the bottom
       child: Visibility(
         visible: _isDragging,
         child: Column(
-          mainAxisAlignment:
-              widget.top ? MainAxisAlignment.center : MainAxisAlignment.start,
+          mainAxisAlignment: widget.top ?? true
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.start,
           children: [
             // Circular progress indicator that reflects swipe progress
-            widget.showProgressIndicator
+            widget.showProgressIndicator ?? true
                 ? CircularProgressIndicator(
                     value: _progress,
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(widget.progressColor),
-                    backgroundColor: widget.progressColor.withOpacity(0.3),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        widget.progressColor ?? Colors.white),
+                    backgroundColor: widget.progressColor != null
+                        ? widget.progressColor!.withOpacity(0.3)
+                        : Colors.white.withOpacity(0.3),
                     strokeWidth: 6,
                   )
                 : const SizedBox(),

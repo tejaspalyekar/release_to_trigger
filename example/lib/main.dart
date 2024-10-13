@@ -35,6 +35,8 @@ class _SurpriseUnlockPageState extends State<SurpriseUnlockPage> {
         initialText: 'Pull down to unlock the surprise',
         triggeredText: 'Release to reveal the surprise!',
         triggerHeight: 250.0,
+        triggerTextStyle: const TextStyle(
+            fontSize: 16, color: Colors.green, fontWeight: FontWeight.bold),
         pullSensitivityHeight: 250,
         onTrigger: () {
           Navigator.of(context).push(ModalBottomSheetRoute(
