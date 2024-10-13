@@ -82,10 +82,11 @@ Here is an example demonstrating how to use the `ReleaseToTrigger` widget in you
 ## Screenshots
 
 Here are some screenshots demonstrating the `ReleaseToTrigger` in action:
+![1](https://github.com/user-attachments/assets/8fefe5f2-3861-4653-a4e4-7ce96f21eed4)
 
 | Initial State                                  | Triggered State                                 |
 |------------------------------------------------|-------------------------------------------------|
-| ![Initial State](screenshots/1.png)            | ![Triggered State](screenshots/2.png)           |
+| ![Initial State](https://github.com/tejaspalyekar/release_to_trigger/blob/main/screenshots/1.png)            | ![Triggered State](screenshots/2.png)           |
 
 ---
 
