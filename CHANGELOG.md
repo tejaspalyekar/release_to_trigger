@@ -1,3 +1,8 @@
+## 1.0.1
+
+- **Added dart documentation comments**: For improving code readability added dart documentation comments.
+- **Remove withOpacity usage**: WithOpacity is now deprecated so migrated from withOpacity to with withAlpha in backgroundColor.
+
 ## 1.0.0
 
 - **Improved swipe sensitivity**: Improved swipe sensitivity.
