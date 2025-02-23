@@ -46,7 +46,7 @@ Showcase the widget in action and use-case:
 
 | **Private Folder Demo**             | **Secret Calculator**                 | 
 | ----------------------------------- | ------------------------------------- |
-| ![Initial State](screenshots/1.png) ![Triggered State](screenshots/3.png)| ![Triggered State](screenshots/2.png) |
+| ![Private Folder Demo](screenshots/1.png)| ![Triggered State](screenshots/2.png) |
 
 ## Parameters
 
