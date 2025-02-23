@@ -48,12 +48,12 @@ Showcase of the widget in action:
 ### Private Folder Demo  
 | Default State | Triggered State |  
 |--------------|----------------|  
-| ![Private Folder Demo](screenshots/1.png) | ![Triggered State](screenshots/2.png) |  
+| ![Private Folder Demo](screenshots/1.png) | ![Private Folder IOS](screenshots/3.png) |  
 
 ### Secret Calculator  
 | Default State |  
 |--------------|  
-| ![Private Folder Demo 1](screenshots/3.png) |  
+| ![Secret Calculator Demo](screenshots/2.png) |  
 
 
 ## Parameters

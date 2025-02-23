@@ -21,8 +21,6 @@ class DemoApp extends StatelessWidget {
   }
 }
 
-
-
 // Private Folder Demo
 class PrivateFolderDemo extends StatefulWidget {
   const PrivateFolderDemo({super.key});
@@ -107,5 +105,4 @@ class _PrivateFolderDemoState extends State<PrivateFolderDemo> {
       },
     );
   }
-
 }

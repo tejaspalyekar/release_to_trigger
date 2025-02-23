@@ -70,15 +70,9 @@ class ReleaseToTrigger extends StatefulWidget {
     this.triggerHeight = 250.0,
     this.pullSensitivityHeight = 250.0,
     this.initialTextStyle = const TextStyle(
-      fontSize: 12,
-      color: Colors.black,
-      fontWeight: FontWeight.bold
-    ),
+        fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold),
     this.triggerTextStyle = const TextStyle(
-      fontSize: 12,
-      color: Colors.blue,
-      fontWeight: FontWeight.bold
-    ),
+        fontSize: 12, color: Colors.blue, fontWeight: FontWeight.bold),
     this.top = true,
     this.showProgressIndicator = true,
     required this.onTrigger,
@@ -95,16 +89,17 @@ class ReleaseToTrigger extends StatefulWidget {
   State<ReleaseToTrigger> createState() => _ReleaseToTriggerState();
 }
 
-class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerProviderStateMixin {
+class _ReleaseToTriggerState extends State<ReleaseToTrigger>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  
+
   double _dragOffset = 0.0;
   bool _triggered = false;
   String _statusText = '';
   double _progress = 0.0;
   bool _isDragging = false;
   bool _withinSensitivity = false;
-  
+
   double _initialTouchY = 0.0;
   double _lastTouchY = 0.0;
   bool _isDragInProgress = false;
@@ -113,7 +108,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
   void initState() {
     super.initState();
     _statusText = widget.initialText ?? "Swipe to trigger";
-    
+
     _animationController = AnimationController(
       vsync: this,
       duration: widget.animationDuration,
@@ -130,7 +125,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
   void _handleDragStart(DragStartDetails details) {
     final screenHeight = MediaQuery.of(context).size.height;
     final sensitivity = widget.pullSensitivityHeight ?? 250.0;
-    
+
     _initialTouchY = details.globalPosition.dy;
     _lastTouchY = _initialTouchY;
     _isDragInProgress = true;
@@ -156,9 +151,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
     final dragDelta = currentTouchY - _lastTouchY;
     _lastTouchY = currentTouchY;
 
-    final isValidDirection = widget.top ?? true
-        ? dragDelta > 0
-        : dragDelta < 0;
+    final isValidDirection = widget.top ?? true ? dragDelta > 0 : dragDelta < 0;
 
     if (!isValidDirection && _dragOffset.abs() < widget.dragThreshold) {
       return;
@@ -170,23 +163,23 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
       }
 
       if (widget.top ?? true) {
-        _dragOffset = (_dragOffset + dragDelta)
-            .clamp(0.0, widget.triggerHeight ?? 250.0);
+        _dragOffset =
+            (_dragOffset + dragDelta).clamp(0.0, widget.triggerHeight ?? 250.0);
       } else {
         _dragOffset = (_dragOffset + dragDelta)
             .clamp(-(widget.triggerHeight ?? 250.0), 0.0);
       }
-      
-      _progress = (_dragOffset.abs() / (widget.triggerHeight ?? 250.0))
-          .clamp(0.0, 1.0);
-      
+
+      _progress =
+          (_dragOffset.abs() / (widget.triggerHeight ?? 250.0)).clamp(0.0, 1.0);
+
       final shouldTrigger = _progress >= 0.99;
       if (shouldTrigger != _triggered) {
         _triggered = shouldTrigger;
         _statusText = shouldTrigger
             ? (widget.triggeredText ?? "Release to trigger action")
             : (widget.initialText ?? "Swipe to trigger");
-            
+
         if (widget.hapticFeedback && shouldTrigger) {
           HapticFeedback.mediumImpact();
         }
@@ -226,11 +219,10 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
       height: 30,
       child: CircularProgressIndicator(
         value: _progress,
-        valueColor: AlwaysStoppedAnimation<Color>(
-          widget.progressColor ?? Colors.blue
-        ),
-        backgroundColor: widget.progressColor?.withAlpha(30) ??
-            Colors.blue.withAlpha(30),
+        valueColor:
+            AlwaysStoppedAnimation<Color>(widget.progressColor ?? Colors.blue),
+        backgroundColor:
+            widget.progressColor?.withAlpha(30) ?? Colors.blue.withAlpha(30),
         strokeWidth: 6,
       ),
     );
@@ -238,20 +230,27 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
 
   /// Builds the pull container that appears when dragging.
   Widget _buildPullContainer() {
-    final containerHeight = _dragOffset.abs().clamp(0.0, widget.triggerHeight ?? 250.0);
-    
+    final containerHeight =
+        _dragOffset.abs().clamp(0.0, widget.triggerHeight ?? 250.0);
+
     return Container(
       height: containerHeight,
       color: widget.backgroundColor,
       alignment: widget.top ?? true ? Alignment.center : Alignment.bottomCenter,
-      child: containerHeight > 0 ? Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (widget.showProgressIndicator ?? true) _buildProgressIndicator(),
-          const SizedBox(height: 10),
-          Text(_statusText, style: _triggered ? widget.triggerTextStyle : widget.initialTextStyle),
-        ],
-      ) : null,
+      child: containerHeight > 0
+          ? Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (widget.showProgressIndicator ?? true)
+                  _buildProgressIndicator(),
+                const SizedBox(height: 10),
+                Text(_statusText,
+                    style: _triggered
+                        ? widget.triggerTextStyle
+                        : widget.initialTextStyle),
+              ],
+            )
+          : null,
     );
   }
 
