@@ -40,13 +40,21 @@ Then, import and start using it in your project:
 import 'package:release_to_trigger/release_to_trigger.dart';
 ```
 
-## 📸 Screenshots
 
-Showcase the widget in action and use-case:
+## 📸 Screenshots  
 
-| **Private Folder Demo**             | **Secret Calculator**                 | 
-| ----------------------------------- | ------------------------------------- |
-| ![Private Folder Demo](screenshots/1.png)| ![Triggered State](screenshots/2.png) |
+Showcase of the widget in action:  
+
+### Private Folder Demo  
+| Default State | Triggered State |  
+|--------------|----------------|  
+| ![Private Folder Demo](screenshots/1.png) | ![Triggered State](screenshots/2.png) |  
+
+### Secret Calculator  
+| Default State |  
+|--------------|  
+| ![Private Folder Demo 1](screenshots/3.png) |  
+
 
 ## Parameters
 
@@ -198,12 +206,3 @@ This package is ideal for:
 ## ⭐ Show Your Support
 
 If you like `release_to_trigger`, please **star** the repository on GitHub, leave a review on PubDev, and feel free to [contribute](https://github.com/tejaspalyekar/release_to_trigger)! Your feedback helps us improve and add more exciting features!
-
-
-
-
-
-
-
-
-
