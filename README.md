@@ -31,7 +31,7 @@ Simply add the following to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  release_to_trigger: ^1.0.0
+  release_to_trigger: ^1.0.2
 ```
 
 Then, import and start using it in your project:

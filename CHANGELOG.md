@@ -1,3 +1,7 @@
+## 1.0.2
+
+- **Code Formatted**: Code formatted using dart format ..
+
 ## 1.0.1
 
 - **Added dart documentation comments**: For improving code readability added dart documentation comments.
