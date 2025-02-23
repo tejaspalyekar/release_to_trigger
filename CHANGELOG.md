@@ -1,3 +1,11 @@
+## 1.0.0
+
+- **Improved swipe sensitivity**: Improved swipe sensitivity.
+- **Added optional haptic feedback**: Added haptic feedback for better interaction.
+- **Solved known bugs & issues**: Solved issues in ios gesture detection.
+- **More customizable styling options**: Better user experience with customizable styling options added.
+
+
 ## 0.0.9
 
 - **Format According to pub.dev rules**: solve ib/release_to_trigger.dart doesn't match the Dart formatter.
