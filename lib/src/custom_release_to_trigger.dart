@@ -1,28 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// A widget that allows users to swipe down or up to trigger an action.
+///
+/// This widget provides a customizable way to detect pull gestures and
+/// execute a function when the user swipes and releases at a certain threshold.
 class ReleaseToTrigger extends StatefulWidget {
+  /// Background color of the pull-to-trigger container.
   final Color? backgroundColor;
+
+  /// Color of the progress indicator.
   final Color? progressColor;
+
+  /// Initial text displayed before the trigger threshold is reached.
   final String? initialText;
+
+  /// Text displayed when the trigger threshold is reached.
   final String? triggeredText;
+
+  /// The height required to trigger the action.
   final double? triggerHeight;
-  final bool? showProgressIndicator;
-  final TextStyle? initialTextStyle;
-  final TextStyle? triggerTextStyle;
+
+  /// Defines the sensitivity range for detecting the pull gesture.
   final double? pullSensitivityHeight;
+
+  /// Determines if the pull gesture starts from the top (`true`) or bottom (`false`).
   final bool? top;
+
+  /// Whether to show a progress indicator during the pull gesture.
+  final bool? showProgressIndicator;
+
+  /// Text style for the initial state text.
+  final TextStyle? initialTextStyle;
+
+  /// Text style for the triggered state text.
+  final TextStyle? triggerTextStyle;
+
+  /// The function to execute when the user releases after reaching the trigger threshold.
   final Function onTrigger;
+
+  /// The child widget over which the pull-to-trigger feature is implemented.
   final Widget child;
-  
-  // New parameters for better customization
+
+  /// Duration of the pull animation.
   final Duration animationDuration;
+
+  /// The curve of the pull animation.
   final Curve animationCurve;
+
+  /// The minimum drag distance required to start triggering the pull gesture.
   final double dragThreshold;
+
+  /// Whether to provide haptic feedback when the trigger threshold is reached.
   final bool hapticFeedback;
+
+  /// A custom widget to use as the progress indicator.
   final Widget? customProgressIndicator;
+
+  /// If `true`, prevents scrolling while dragging the pull container.
   final bool preventScrollingWhileDragging;
 
+  /// Creates a `ReleaseToTrigger` widget.
   const ReleaseToTrigger({
     super.key,
     this.backgroundColor = Colors.transparent,
@@ -88,6 +126,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
     super.dispose();
   }
 
+  /// Handles the start of the drag gesture.
   void _handleDragStart(DragStartDetails details) {
     final screenHeight = MediaQuery.of(context).size.height;
     final sensitivity = widget.pullSensitivityHeight ?? 250.0;
@@ -109,6 +148,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
     }
   }
 
+  /// Handles updates during the drag gesture.
   void _handleDragUpdate(DragUpdateDetails details) {
     if (!_withinSensitivity || !_isDragInProgress) return;
 
@@ -129,7 +169,6 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
         _isDragging = true;
       }
 
-      // Ensure drag offset stays within bounds and positive
       if (widget.top ?? true) {
         _dragOffset = (_dragOffset + dragDelta)
             .clamp(0.0, widget.triggerHeight ?? 250.0);
@@ -138,11 +177,9 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
             .clamp(-(widget.triggerHeight ?? 250.0), 0.0);
       }
       
-      // Calculate progress
       _progress = (_dragOffset.abs() / (widget.triggerHeight ?? 250.0))
           .clamp(0.0, 1.0);
       
-      // Update triggered state
       final shouldTrigger = _progress >= 0.99;
       if (shouldTrigger != _triggered) {
         _triggered = shouldTrigger;
@@ -157,6 +194,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
     });
   }
 
+  /// Handles the end of the drag gesture.
   void _handleDragEnd(DragEndDetails details) {
     if (_withinSensitivity && _triggered) {
       widget.onTrigger();
@@ -177,6 +215,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
     });
   }
 
+  /// Builds the progress indicator widget.
   Widget _buildProgressIndicator() {
     if (widget.customProgressIndicator != null) {
       return widget.customProgressIndicator!;
@@ -190,13 +229,14 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
         valueColor: AlwaysStoppedAnimation<Color>(
           widget.progressColor ?? Colors.blue
         ),
-        backgroundColor: widget.progressColor?.withOpacity(0.3) ??
-            Colors.blue.withOpacity(0.3),
+        backgroundColor: widget.progressColor?.withAlpha(30) ??
+            Colors.blue.withAlpha(30),
         strokeWidth: 6,
       ),
     );
   }
 
+  /// Builds the pull container that appears when dragging.
   Widget _buildPullContainer() {
     final containerHeight = _dragOffset.abs().clamp(0.0, widget.triggerHeight ?? 250.0);
     
@@ -204,28 +244,13 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
       height: containerHeight,
       color: widget.backgroundColor,
       alignment: widget.top ?? true ? Alignment.center : Alignment.bottomCenter,
-      child: containerHeight > 0 ? SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: widget.top ?? true
-                ? MainAxisAlignment.center
-                : MainAxisAlignment.end,
-            children: [
-              if (widget.showProgressIndicator ?? true) 
-                _buildProgressIndicator(),
-              const SizedBox(height: 10),
-              Text(
-                _statusText,
-                style: _triggered
-                    ? widget.triggerTextStyle
-                    : widget.initialTextStyle,
-              ),
-            ],
-          ),
-        ),
+      child: containerHeight > 0 ? Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (widget.showProgressIndicator ?? true) _buildProgressIndicator(),
+          const SizedBox(height: 10),
+          Text(_statusText, style: _triggered ? widget.triggerTextStyle : widget.initialTextStyle),
+        ],
       ) : null,
     );
   }
@@ -233,7 +258,6 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      behavior: HitTestBehavior.translucent,
       onVerticalDragStart: _handleDragStart,
       onVerticalDragUpdate: _handleDragUpdate,
       onVerticalDragEnd: _handleDragEnd,
@@ -241,20 +265,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> with SingleTickerPr
         clipBehavior: Clip.none,
         children: [
           Positioned.fill(child: widget.child),
-          if (widget.top ?? true)
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: _buildPullContainer(),
-            ),
-          if (!(widget.top ?? true))
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: _buildPullContainer(),
-            ),
+          Positioned(top: 0, left: 0, right: 0, child: _buildPullContainer()),
         ],
       ),
     );
