@@ -51,13 +51,9 @@ import 'package:release_to_trigger/release_to_trigger.dart';
 
 ### Interactive Demos
 
-#### Top Drag Demo
-[![Top Drag Demo](screenshots/2.png)](screenshots/top_drag.mp4)
-*Click the image to view the top drag demo video*
-
-#### Bottom Drag Demo
-[![Bottom Drag Demo](screenshots/2.png)](screenshots/bottom_drag.mp4)
-*Click the image to view the bottom drag demo video*
+| Top Drag Demo | Bottom Drag Demo |
+|---------------|------------------|
+| ![Top Drag Demo](screenshots/top_drag.gif) | ![Bottom Drag Demo](screenshots/bottom_up_drag.gif) |
 
 ### Secret Vault Implementation
 ![Secret Vault Demo](screenshots/2.png)
