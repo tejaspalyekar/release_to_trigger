@@ -30,6 +30,7 @@ class _SurpriseUnlockPageState extends State<SurpriseUnlockPage> {
         title: const Text('Unlock the Surprise!'),
       ),
       body: ReleaseToTrigger(
+        top: true,
         backgroundColor: Colors.green.withOpacity(0.2),
         progressColor: Colors.green,
         initialText: 'Pull down to unlock the surprise',

@@ -58,58 +58,51 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onVerticalDragStart: (details) {
-        // Detect if the drag starts within the pull sensitivity area
-        if (details.globalPosition.dy <=
-                (widget.pullSensitivityHeight ?? 250) &&
-            (widget.top ?? true)) {
-          _withinSensitivity = true; // Start dragging from the top
-        } else if (details.globalPosition.dy >=
-                MediaQuery.of(context).size.height -
-                    (widget.pullSensitivityHeight ?? 250) &&
-            !(widget.top ?? true)) {
-          _withinSensitivity = true; // Start dragging from the bottom
-        } else {
-          _withinSensitivity = false; // Ignore drag outside sensitivity area
-        }
-      },
-      onVerticalDragUpdate: (details) {
-        if (!_withinSensitivity) {
-          return; // Ignore if drag starts outside sensitivity area
-        }
-        setState(() {
-          // Only start showing the pull effect if the user has dragged more than the threshold
-          if (details.delta.dy.abs() > _dragThreshold || _isDragging) {
-            _isDragging = true;
-            _dragOffset += details.delta.dy;
-            _progress = (_dragOffset.abs() / (widget.triggerHeight ?? 250))
-                .clamp(0.0, 1.0); // Progress between 0 and 1
+        // Inside build method, GestureDetector code...
+  
+  onVerticalDragStart: (details) {
+    print("Drag Start Detected"); // Debugging print
+    // Sensitivity area checks remain the same as per your logic
+  },
+  
+  onVerticalDragUpdate: (details) {
+    if (!_withinSensitivity) return;
 
-            // Update status based on the current drag position
-            if (_dragOffset.abs() >= widget.triggerHeight!) {
-              _statusText = widget.triggeredText ?? "Release to trigger action";
-              _triggered = true;
-            } else {
-              _statusText = widget.initialText ?? "Swipe to trigger";
-              _triggered = false;
-            }
-          }
-        });
-      },
-      onVerticalDragEnd: (details) {
-        if (_withinSensitivity &&
-            _triggered &&
-            _dragOffset.abs() >= widget.triggerHeight!) {
-          widget.onTrigger(); // Trigger developer's custom action
-        }
-        setState(() {
-          _dragOffset = 0.0;
-          _progress = 0.0; // Reset progress
-          _statusText = widget.initialText ?? "Swipe to trigger";
-          _isDragging = false; // Reset dragging state
-          _withinSensitivity = false; // Reset sensitivity state
-        });
-      },
+    setState(() {
+      _isDragging = true;
+      _dragOffset += details.delta.dy;
+      _progress = (_dragOffset.abs() / (widget.triggerHeight ?? 250)).clamp(0.0, 1.0);
+      print("Drag Update: Offset: $_dragOffset, Progress: $_progress"); // Debug
+
+      if (_dragOffset.abs() >= widget.triggerHeight!) {
+        _statusText = widget.triggeredText!;
+        _triggered = true;
+      } else {
+        _statusText = widget.initialText!;
+        _triggered = false;
+      }
+    });
+  },
+
+  onVerticalDragEnd: (details) {
+    print("Drag End: Triggered: $_triggered"); // Debugging print
+    if (_withinSensitivity && _triggered && _dragOffset.abs() >= widget.triggerHeight!) {
+      widget.onTrigger(); // Action Triggered
+    }
+
+    // Reset State
+    setState(() {
+      _dragOffset = 0.0;
+      _progress = 0.0;
+      _statusText = widget.initialText!;
+      _isDragging = false;
+      _withinSensitivity = false;
+    });
+  },
+
+  // Add more debugging prints within your Widget build methods
+  // to track the actual values and state changes.
+
       child: Stack(
         children: [
           Positioned.fill(
