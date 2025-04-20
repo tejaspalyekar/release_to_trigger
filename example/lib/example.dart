@@ -214,8 +214,6 @@ class _SecretVaultScreenState extends State<SecretVaultScreen>
         ],
       ),
       body: ReleaseToTrigger(
-        // Visual Customization
-
         backgroundColor: Colors.deepPurple.withAlpha(20),
         progressColor: Colors.deepPurple,
         initialText: 'Pull down to unlock vault',
@@ -230,15 +228,11 @@ class _SecretVaultScreenState extends State<SecretVaultScreen>
           color: Colors.deepPurple,
           fontWeight: FontWeight.bold,
         ),
-
-        // Progress Indicator Customization
         progressIndicatorType: ProgressIndicatorType.rotatingIcon,
         progressIcon: Icons.lock_open,
         progressIconSize: 40.0,
         rotateProgress: true,
-        maxRotationAngle: 2 * 3.14159, // Full rotation
-
-        // Behavior Configuration
+        maxRotationAngle: 2 * 3.14159,
         triggerHeight: 200.0,
         pullSensitivityHeight: 250.0,
         top: true,
@@ -250,8 +244,6 @@ class _SecretVaultScreenState extends State<SecretVaultScreen>
         preventScrollingWhileDragging: true,
         enableHorizontalSwipe: true,
         swipeDirection: Axis.vertical,
-
-        // Trigger Action
         onTrigger: () {
           setState(() {
             _isVaultOpen = !_isVaultOpen;
@@ -262,8 +254,6 @@ class _SecretVaultScreenState extends State<SecretVaultScreen>
             }
           });
         },
-
-        // Child Content
         child: _isVaultOpen ? _buildVaultContent() : _buildLockedState(),
       ),
     );
