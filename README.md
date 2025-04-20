@@ -50,9 +50,14 @@ import 'package:release_to_trigger/release_to_trigger.dart';
 ## 📸 Demo Showcase
 
 ### Interactive Demos
-| Top Drag Demo | Bottom Drag Demo |
-|---------------|------------------|
-| [![Top Drag Demo](screenshots/top_drag.mp4)](screenshots/top_drag.mp4) | [![Bottom Drag Demo](screenshots/bottom_drag.mp4)](screenshots/bottom_drag.mp4) |
+
+#### Top Drag Demo
+[![Top Drag Demo](screenshots/2.png)](screenshots/top_drag.mp4)
+*Click the image to view the top drag demo video*
+
+#### Bottom Drag Demo
+[![Bottom Drag Demo](screenshots/2.png)](screenshots/bottom_drag.mp4)
+*Click the image to view the bottom drag demo video*
 
 ### Secret Vault Implementation
 ![Secret Vault Demo](screenshots/2.png)
