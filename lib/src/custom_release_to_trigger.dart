@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/physics.dart';
 
 /// Defines the type of progress indicator to use
 enum ProgressIndicatorType {
@@ -416,6 +415,7 @@ class _ReleaseToTriggerState extends State<ReleaseToTrigger>
   late AnimationController _animationController;
   late Animation<double> _springAnimation;
   late Animation<double> _fadeAnimation;
+  // ignore: unused_field
   late Animation<double> _rotationAnimation;
 
   double _dragOffset = 0.0;

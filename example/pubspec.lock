@@ -142,11 +142,10 @@ packages:
   release_to_trigger:
     dependency: "direct main"
     description:
-      name: release_to_trigger
-      sha256: "791637ba27bc1083f94ce68185cb623483412705e0484fc1d37d522c965d9f6b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.2"
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
