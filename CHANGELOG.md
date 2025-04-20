@@ -1,3 +1,25 @@
+## 1.0.3
+
+- **Enhanced Documentation**: Added comprehensive documentation with use cases and examples
+- **Improved Example**: Created a new Secret Vault demo showcasing advanced features
+- **Better Parameter Organization**: Reorganized parameters into logical categories
+- **Added Parameter Tables**: Created tables for better parameter documentation
+- **Progress Indicator Showcase**: Added detailed examples for each progress indicator type
+- **Visual Improvements**: Enhanced README with better formatting and structure
+- **Package Optimization**: Improved package metadata, added issue tracker, and enhanced documentation links
+- **Testing Support**: Added test dependencies for better code quality
+- **Topic Optimization**: Refined package topics for better discoverability
+- **Issue Reporting**: Added clear guidelines for reporting issues
+- **Enhanced Progress Indicator Customization**: Added support for multiple progress indicator types:
+  - Rotating icons with customizable rotation
+  - Scaling icons and images
+  - Fading icons and images
+  - Custom progress widgets
+- **Added Icon Support**: Can now use icons instead of circular progress
+- **Added Image Support**: Support for custom images as progress indicators
+- **Custom Progress Builder**: Added ability to create fully custom progress indicators
+- **Improved Animation Control**: Better control over rotation, scaling, and fading animations
+
 ## 1.0.2
 
 - **Code Formatted**: Code formatted using dart format ..
@@ -13,7 +35,6 @@
 - **Added optional haptic feedback**: Added haptic feedback for better interaction.
 - **Solved known bugs & issues**: Solved issues in ios gesture detection.
 - **More customizable styling options**: Better user experience with customizable styling options added.
-
 
 ## 0.0.9
 

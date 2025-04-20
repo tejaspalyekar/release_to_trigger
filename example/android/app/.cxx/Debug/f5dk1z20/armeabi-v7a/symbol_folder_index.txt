@@ -1,0 +1,1 @@
+C:\flutter_project\release_to_trigger\example\build\app\intermediates\cxx\Debug\f5dk1z20\obj\armeabi-v7a
