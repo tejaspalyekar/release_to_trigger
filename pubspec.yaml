@@ -1,31 +1,35 @@
 name: release_to_trigger
-description: "Capture swipe gestures to trigger actions with customizable progress indicators, smooth animations, and haptic feedback. Great for pull-to-refresh UIs."
-version: 1.0.4
+description: "A general-purpose pull-to-reveal or swipe-to-trigger gesture primitive to reveal hidden content, unlock features, trigger secret vaults, and perform pull-to-refresh actions."
+version: 2.1.0
 homepage: https://github.com/tejaspalyekar/release_to_trigger
 repository: https://github.com/tejaspalyekar/release_to_trigger
 issue_tracker: https://github.com/tejaspalyekar/release_to_trigger/issues
 documentation: https://github.com/tejaspalyekar/release_to_trigger/blob/main/README.md
 license: MIT
+funding: https://github.com/sponsors/tejaspalyekar # TODO: Update with your actual sponsors URL if needed
 topics:
-  - pull-to-refresh
+  - pull-to-reveal
   - gesture-detection
   - interactive-ui
   - flutter-widgets
   - animations
+  - gesture
+  - ux
+  - pull-to-refresh
   
 environment:
-  sdk: '>=3.4.3 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: '>=3.5.0 <4.0.0'
+  flutter: '>=3.19.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  sensors_plus: ^6.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
-  pedantic: ^1.11.1
+  flutter_lints: ^6.0.0
   test: ^1.24.9
   mockito: ^5.4.4
 

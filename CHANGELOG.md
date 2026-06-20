@@ -1,3 +1,39 @@
+## 2.1.0
+
+### New Features
+- **Named Constructor `ReleaseToTrigger.refresh`**: Dedicated constructor configured for pull-to-refresh with state holding until async Future completion.
+- **Multi-Stage Triggers (`TriggerStage`)**: Supports threshold stages (e.g., halfway, threshold, overpull) with custom labels, callbacks (`onStageReached`), and custom `textStyle` configurations.
+- **Secure Combo Lock**: Added option to require pointer long-press hold (`requireLongPressBeforePull`) for a configured duration before dragging is unlocked. Includes glassmorphic radial overlay animations and custom builder support (`longPressProgressBuilder`).
+- **Shake-to-Cancel**: Integrates `sensors_plus` to automatically collapse active drag gestures on device shake (`enableShakeToCancel`).
+- **Real-Time Progress Hook (`onProgressTick`)**: Real-time progress tick stream callback for audio pitch, dynamic haptics, or advanced visual effects.
+- **Enhanced Visual Customizations**:
+  - `progressBackgroundColor` to customize the circular progress track track color.
+  - `progressStrokeWidth` to adjust the circular indicator stroke thickness.
+  - `padding` to customize drawer inner padding alignment.
+  - `spacing` to adjust layout distance between status text and indicators.
+
+### Improvements & Fixes
+- Resolved long press gesture conflict in simulated widget tests by decoupling pointer drag start state initialization from animation timeline launches.
+- Expanded testing suite to 15 robust test cases covering named constructors, stages, lock combinations, haptic mocks, and styling parameters.
+
+## 2.0.0
+
+### Breaking Changes
+- **Horizontal Swipe Enabled**: `enableHorizontalSwipe: true` and `swipeDirection: Axis.horizontal` are now fully functional. Added `left` parameter to customize horizontal edge gesture starting direction.
+- **Enforce `pullSensitivityHeight`**: Gestures now only start if initiated within `pullSensitivityHeight` pixels from the active edge (top/bottom/left/right).
+- **Enforce `preventScrollingWhileDragging`**: Handled via `AbsorbPointer` wrapping the child widget to prevent scrolling of children lists during active drag sessions.
+
+### SDK & Tooling Updates
+- Bumped minimum Dart SDK constraint to `3.5.0` and Flutter SDK constraint to `3.19.0`.
+- Upgraded `flutter_lints` to `^6.0.0` and removed discontinued `pedantic` package.
+
+### Bug Fixes
+- Removed unused `_rotationAnimation` property and its lint warning suppressions.
+
+### Documentation & Example
+- Updated example app to demonstrate horizontal and vertical swipe gesture modes.
+- Added comprehensive widget test suite with coverage for gesture tracking, indicators, scrolling prevention, and sensitivity constraints.
+
 ## 1.0.4
 
 - **Package Pubspec File Updated**: Package Description Updated

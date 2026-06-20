@@ -1,289 +1,290 @@
-# **`release_to_trigger`** - Swipe Gesture & Trigger Actions for Flutter 📱💥
+# **`release_to_trigger`** - Pull-to-Reveal & Gesture Action Primitive 📱✨
 
-`release_to_trigger` is a powerful Flutter widget designed to capture vertical and horizontal swipe gestures and trigger custom actions when users pull and release the swipe at a defined height. With support for both **top** and **bottom swipe gestures**, it's perfect for building **interactive UIs**, **pull-to-refresh** controls, or custom **trigger actions** like loading new content or activating specific app features.
+<p align="center">
+  <img src="screenshots/01_hero_thumbnail.png" alt="Release to Trigger Hero Banner" width="100%" />
+</p>
+
+<p align="center">
+  <a href="https://pub.dev/packages/release_to_trigger"><img src="https://img.shields.io/pub/v/release_to_trigger?color=blue&style=flat-square" alt="Pub Version" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT" /></a>
+</p>
+
+`release_to_trigger` is a highly customizable, zero-third-party-runtime-dependency **pull-to-reveal** and **swipe-to-trigger** gesture primitive for Flutter. 
+
+Unlike generic pull-to-refresh widgets designed solely for list updates, `release_to_trigger` is a general-purpose interaction wrapper. It lets you capture vertical and horizontal swipe gestures to unlock secret folders, reveal hidden widgets, trigger custom screen actions, build secure lock combos, or run standard pull-to-refresh logic with fluid visual feedback.
+
+---
 
 ## 🏆 Key Features
 
-- **Spring Animations**: Natural, physics-based animations for smooth interactions
-- **Pull-to-Trigger Action**: Easily define actions that get triggered when the swipe reaches a set height
-- **Customizable Appearance**: Modify text styles, colors, and progress indicators to match your app's theme
-- **Progress Indicator**: Real-time feedback with a circular progress indicator that adjusts dynamically
-- **User Feedback Integration**: Customize **swipe feedback** with visual indicators and smooth animations
-- **Haptic Feedback**: Optional haptic feedback for better interaction with user
-- **Material 3 Support**: Built-in support for Material 3 design system
-- **Adaptive Layouts**: Works seamlessly across different screen sizes and orientations
-- **Multi-directional Swipe Support**: Recognize and respond to both vertical and horizontal swipes
+- **General-Purpose Gesture Wrapper**: Wrap any widget to intercept pulls (down, up, left, right) and run arbitrary actions.
+- **Named Constructor `ReleaseToTrigger.refresh`**: Built-in support for asynchronous refresh tasks. Holds the loading state widget visible until the future completes.
+- **Multi-Stage Triggers (`TriggerStage`)**: Support multi-threshold drags (e.g., halfway, threshold, overpull) with custom status labels and step callbacks (`onStageReached`).
+- **Secure Combo Lock Mode**: Require users to press and hold (configurable duration) before dragging is unlocked. Features custom glassmorphic progress overlays.
+- **Real-Time Progress Hook (`onProgressTick`)**: Subscribe to the pull progress stream (0.0 to 1.0+) to wire up custom audio, dynamic haptics, or advanced visual effects.
+- **Shake-to-Cancel**: Automatically cancel drag gestures if the user shakes the device (powered by the trusted `sensors_plus` package).
+- **Haptic Feedback**: High-fidelity tactile feedback out of the box when reaching thresholds and completing gestures.
 
-### ✨ Use Cases
+---
 
-- **Pull-to-Refresh** functionality
-- **Pull-to-Reveal** functionality
-- **Swipe-to-Activate** features
-- Unlock **hidden content** or **actions** based on user interactions
-- Enhance **user experience** with **gesture-based controls**
-- Create **secret access** mechanisms
-- Implement **custom navigation** patterns
+## 📸 Interactive Demos & Showcases
 
-## 🔥 Why Choose `release_to_trigger`?
+### 🔐 Secure Combo Lock (Long Press + Swipe down)
+The user holds their thumb on the fingerprint scanner to disarm the lock, then swipes down to trigger the vault unlock. Includes a hardware shake-to-cancel "panic" feature!
 
-- 🎯 **High Customizability**: Tailor the widget's look and behavior to your app's design
-- 🚀 **Optimized Performance**: Built for smooth animations and responsiveness on any screen size
-- 💼 **Versatile Implementation**: Use in apps that require **gesture detection**, **refresh controls**, or **interactive triggers**
-- 🌈 **Modern Design**: Support for Material 3 and adaptive layouts
-- 🔄 **Multi-directional Support**: Works with both vertical and horizontal swipes
+<p align="center">
+  <img src="screenshots/03_pull_reveal_demo.gif" alt="Dual-Factor Secure Combo Lock Demo" width="300px" />
+</p>
+
+### ⚙️ Multi-Directional & Multi-Stage Pulling
+
+| Top Pull-Down (Standard) | Bottom Pull-Up | Horizontal Swipe-to-Reveal |
+|:---:|:---:|:---:|
+| <img src="screenshots/top_drag.gif" width="220px" /> | <img src="screenshots/bottom_up_drag.gif" width="220px" /> | <img src="screenshots/03_pull_reveal_demo.gif" width="220px" /> |
+
+### 📱 Real-World App Console Screens
+
+| 1. Locked Console | 2. Fingerprint Scanning | 3. Decrypted Vault |
+|:---:|:---:|:---:|
+| <img src="screenshots/1.png" width="240px" /> | <img src="screenshots/2.png" width="240px" /> | <img src="screenshots/3.png" width="240px" /> |
+
+---
 
 ## 🚀 Getting Started
 
-Simply add the following to your `pubspec.yaml` file:
+Add the package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  release_to_trigger: ^1.0.3
+  release_to_trigger: ^2.1.0
 ```
 
-Then, import and start using it in your project:
+Import the package in your Dart code:
 
 ```dart
 import 'package:release_to_trigger/release_to_trigger.dart';
 ```
 
-## 📸 Demo Showcase
+---
 
-### Interactive Demos
+## 📖 Step-by-Step Tutorial
 
-| Top Drag Demo | Bottom Drag Demo |
-|---------------|------------------|
-| ![Top Drag Demo](screenshots/top_drag.gif) | ![Bottom Drag Demo](screenshots/bottom_up_drag.gif) |
+For a detailed walkthrough on how to build a physical-feeling **Secret Vault** with fingerprint scanning (long press), dynamic haptic ticks, and shake-to-cancel mechanics, check out the official step-by-step guide on Medium:
 
-### Secret Vault Implementation
-![Secret Vault Demo](screenshots/2.png)
+👉 **[Building a Physical-Feeling "Secret Vault" in Flutter: Advanced Haptic & Gesture Mechanics](https://medium.com/@tejaspalyekar18/building-a-physical-feeling-secret-vault-in-flutter-advanced-haptic-gesture-mechanics-89ef64fc2913)**
 
-## 🔧 Complete Example
+---
 
-Here's a complete example of a Secret Vault implementation that showcases the widget's capabilities:
+## 🔧 Developer Recipes & Code Snippets
+
+### 1. Basic Pull-to-Reveal
+Simple wrapper that reveals a private dashboard panel when the user pulls down from the top edge.
 
 ```dart
-class SecretVaultScreen extends StatefulWidget {
-  const SecretVaultScreen({super.key});
+ReleaseToTrigger(
+  initialText: 'Pull down to reveal private panel',
+  triggeredText: 'Release to unlock',
+  backgroundColor: Colors.blue.withAlpha(20),
+  progressColor: Colors.blue,
+  triggerHeight: 120.0,
+  onTrigger: () {
+    setState(() {
+      _showPanel = true;
+    });
+  },
+  child: const HomeScreenBody(),
+)
+```
 
-  @override
-  State<SecretVaultScreen> createState() => _SecretVaultScreenState();
+### 2. Standard Pull-to-Refresh (`ReleaseToTrigger.refresh`)
+Uses the dedicated async refresh constructor. The refresh container remains visible until the future resolved.
+
+```dart
+ReleaseToTrigger.refresh(
+  onRefresh: () async {
+    // Perform network request or DB reload
+    await Future.delayed(const Duration(seconds: 2));
+  },
+  child: ListView.builder(
+    itemCount: 20,
+    itemBuilder: (context, index) => ListTile(title: Text('Item $index')),
+  ),
+)
+```
+
+### 3. Multi-Stage Pulling with Overpull (`TriggerStage`)
+Triggers intermediate callbacks and updates labels as the user pulls past different thresholds.
+
+```dart
+ReleaseToTrigger(
+  triggerHeight: 120.0,
+  stages: [
+    TriggerStage(
+      threshold: 0.5,
+      label: 'Stage 1: Pull further...',
+      textStyle: TextStyle(color: Colors.orange, fontSize: 14),
+      onStageReached: () => print('Halfway there!'),
+    ),
+    TriggerStage(
+      threshold: 1.0,
+      label: 'Stage 2: Release to open!',
+      textStyle: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+      onStageReached: () => HapticFeedback.mediumImpact(),
+    ),
+    TriggerStage(
+      threshold: 1.5,
+      label: 'Stage 3: OVERPULL UNLOCKED!',
+      textStyle: TextStyle(color: Colors.red, fontSize: 16),
+      onStageReached: () => HapticFeedback.vibrate(),
+    ),
+  ],
+  onTrigger: () {
+    print('Action triggered!');
+  },
+  child: const DashboardView(),
+)
+```
+
+### 4. Secure Vault Lock (Long-Press-then-Pull Combo)
+Requires the user to press and hold for 800ms before they can pull to open the folder.
+
+```dart
+ReleaseToTrigger(
+  requireLongPressBeforePull: true,
+  longPressDuration: const Duration(milliseconds: 800),
+  initialText: 'Hold still, then pull down',
+  triggeredText: 'Release to decrypt',
+  
+  // Custom glassmorphic hold progress ring
+  longPressProgressBuilder: (context, progress) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.black.withAlpha(120),
+        shape: BoxShape.circle,
+      ),
+      child: CircularProgressIndicator(
+        value: progress,
+        color: Colors.greenAccent,
+      ),
+    );
+  },
+  onTrigger: () => _openSecureVault(),
+  child: const VaultLandingView(),
+)
+```
+
+### 5. Advanced Shake-to-Cancel
+If the user pulls the container down but changes their mind, they can shake their device to cancel the gesture.
+
+#### Built-in Integration (requires `sensors_plus` dependency configuration):
+```dart
+ReleaseToTrigger(
+  enableShakeToCancel: true, // Shaking during active drag collapses it automatically
+  onTrigger: () => _doSomething(),
+  child: const MyWidget(),
+)
+```
+
+#### Custom Shake Receiver Recipe:
+If you want custom accelerometer parameters, you can listen to the stream manually and trigger a collapse using a key or state toggle:
+```dart
+import 'dart:async';
+import 'package:sensors_plus/sensors_plus.dart';
+
+// In your State class:
+StreamSubscription? _sensorSub;
+
+void startShakeDetection(VoidCallback onShake) {
+  _sensorSub = userAccelerometerEventStream().listen((event) {
+    final double force = event.x.abs() + event.y.abs() + event.z.abs();
+    if (force > 15.0) { // Customize your threshold
+      onShake();
+    }
+  });
 }
 
-class _SecretVaultScreenState extends State<SecretVaultScreen>
-    with SingleTickerProviderStateMixin {
-  bool _isVaultOpen = false;
-  late AnimationController _vaultAnimationController;
-  late Animation<double> _vaultScaleAnimation;
-  late Animation<double> _vaultRotationAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _vaultAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 800),
-    );
-
-    _vaultScaleAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
-      CurvedAnimation(
-        parent: _vaultAnimationController,
-        curve: Curves.elasticOut,
-      ),
-    );
-
-    _vaultRotationAnimation = Tween<double>(begin: 0.0, end: 0.1).animate(
-      CurvedAnimation(
-        parent: _vaultAnimationController,
-        curve: Curves.easeInOut,
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Secret Vault'),
-        backgroundColor: _isVaultOpen ? Colors.deepPurple.shade900 : null,
-        actions: [
-          if (_isVaultOpen)
-            IconButton(
-              icon: const Icon(Icons.lock),
-              onPressed: () {
-                setState(() {
-                  _isVaultOpen = false;
-                });
-              },
-            ),
-        ],
-      ),
-      body: ReleaseToTrigger(
-        // Visual Customization
-        backgroundColor: Colors.deepPurple.withAlpha(20),
-        progressColor: Colors.deepPurple,
-        initialText: 'Pull down to unlock vault',
-        triggeredText: 'Release to access secret content',
-        initialTextStyle: const TextStyle(
-          fontSize: 16,
-          color: Colors.white70,
-          fontWeight: FontWeight.w500,
-        ),
-        triggerTextStyle: const TextStyle(
-          fontSize: 16,
-          color: Colors.deepPurple,
-          fontWeight: FontWeight.bold,
-        ),
-
-        // Progress Indicator Customization
-        progressIndicatorType: ProgressIndicatorType.rotatingIcon,
-        progressIcon: Icons.lock_open,
-        progressIconSize: 40.0,
-        rotateProgress: true,
-        maxRotationAngle: 2 * 3.14159, // Full rotation
-
-        // Behavior Configuration
-        triggerHeight: 150.0,
-        pullSensitivityHeight: 200.0,
-        top: true,
-        showProgressIndicator: true,
-        animationDuration: const Duration(milliseconds: 400),
-        animationCurve: Curves.easeInOut,
-        dragThreshold: 15.0,
-        hapticFeedback: true,
-        preventScrollingWhileDragging: true,
-        enableHorizontalSwipe: true,
-        swipeDirection: Axis.vertical,
-
-        // Trigger Action
-        onTrigger: () {
-          setState(() {
-            _isVaultOpen = !_isVaultOpen;
-            if (_isVaultOpen) {
-              _vaultAnimationController.forward();
-            } else {
-              _vaultAnimationController.reverse();
-            }
-          });
-        },
-
-        // Child Content
-        child: _isVaultOpen ? _buildVaultContent() : _buildLockedState(),
-      ),
-    );
-  }
+@override
+void dispose() {
+  _sensorSub?.cancel();
+  super.dispose();
 }
 ```
 
+---
+
 ## 📚 Parameter Documentation
 
-### Essential Parameters
+### Core Configuration
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `onTrigger` | `Function` | Required callback function that executes when the trigger threshold is reached | - |
-| `child` | `Widget` | Required widget to be wrapped with the pull-to-trigger functionality | - |
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `onTrigger` | `Function` | Required | Callback triggered when the user releases drag past the threshold. |
+| `child` | `Widget` | Required | The content widget wrapped with the gesture recognition layer. |
+| `onRefresh` | `Future<void> Function()?` | `null` | Only available in `ReleaseToTrigger.refresh`. Holds visual loading state until resolved. |
 
-### Visual Customization
+### Visual Options
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `backgroundColor` | `Color?` | Background color of the pull area | `Colors.transparent` |
-| `progressColor` | `Color?` | Color of the progress indicator | `Colors.blue` |
-| `initialText` | `String?` | Text shown before reaching the trigger threshold | `'Swipe to trigger'` |
-| `triggeredText` | `String?` | Text shown when ready to trigger | `'Release to trigger action'` |
-| `initialTextStyle` | `TextStyle?` | Style for the initial text | `TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold)` |
-| `triggerTextStyle` | `TextStyle?` | Style for the triggered text | `TextStyle(fontSize: 12, color: Colors.blue, fontWeight: FontWeight.bold)` |
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `backgroundColor` | `Color?` | `Colors.transparent` | Background color of the revealed pull drawer. |
+| `progressColor` | `Color?` | `Colors.blue` | Color of the progress indicators. |
+| `progressBackgroundColor` | `Color?` | `null` | Track background color of the circular progress indicator. |
+| `progressStrokeWidth` | `double` | `6.0` | Stroke thickness of the circular progress indicator. |
+| `padding` | `EdgeInsetsGeometry?` | `EdgeInsets.symmetric(vertical: 16, horizontal: 16)` | Inner padding for the pull-to-trigger container drawer. |
+| `spacing` | `double` | `12.0` | Spacing between the progress indicator and the text status label. |
+| `initialText` | `String?` | `'Swipe to trigger'` | Instruction text displayed during initial pull. |
+| `triggeredText` | `String?` | `'Release to trigger action'` | Instruction text displayed once threshold is crossed. |
+| `initialTextStyle` | `TextStyle?` | `TextStyle(fontSize: 12)` | Text style for the initial text. |
+| `triggerTextStyle` | `TextStyle?` | `TextStyle(fontSize: 12, color: Colors.blue)` | Text style for the active trigger text. |
+| `showProgressIndicator` | `bool?` | `true` | Whether to show the build indicator. |
+| `progressIndicatorType` | `ProgressIndicatorType` | `ProgressIndicatorType.circular` | Indicator type: `.circular`, `.rotatingIcon`, `.scalingIcon`, `.fadingIcon`, or `.custom`. |
+| `progressIcon` | `IconData?` | `Icons.refresh` | Icon used in icon-based progress indicator types. |
+| `progressIconSize` | `double` | `30.0` | Size of the progress indicator icon. |
+| `progressImage` | `ImageProvider?` | `null` | Custom image/asset used for image scaling or fading. |
+| `progressBuilder` | `Widget Function(double)?` | `null` | A builder function for fully custom indicator layouts. |
 
-### Progress Indicator Types
+### Gesture & Motion Behavior
 
-The widget supports multiple types of progress indicators through the `progressIndicatorType` parameter:
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `triggerHeight` | `double?` | `250.0` | Drag distance required to reach 100% trigger status. |
+| `pullSensitivityHeight` | `double?` | `250.0` | Boundary zone near the screen edge where gestures are captured. |
+| `top` | `bool?` | `true` | Pull anchor side: `true` (top down), `false` (bottom up). |
+| `left` | `bool?` | `true` | Horizontal anchor side: `true` (left to right), `false` (right to left). |
+| `enableHorizontalSwipe` | `bool` | `false` | Enables left-to-right or right-to-left pull. |
+| `swipeDirection` | `Axis` | `Axis.vertical` | Swipe tracking axis constraint. |
+| `dragThreshold` | `double` | `10.0` | Minimum movement threshold before showing the drag drawer (prevents jitter). |
+| `preventScrollingWhileDragging` | `bool` | `true` | Locks child scroll interaction while pulling down. |
+| `stages` | `List<TriggerStage>?` | `null` | Intermediate trigger threshold stages. |
+| `onProgressTick` | `void Function(double)?` | `null` | Callback for real-time progress (e.g., custom sound pitches). |
 
-1. **Circular Progress** (default):
-   ```dart
-   progressIndicatorType: ProgressIndicatorType.circular,
-   progressColor: Colors.blue,
-   ```
+### Security & Hardware Features
 
-2. **Rotating Icon**:
-   ```dart
-   progressIndicatorType: ProgressIndicatorType.rotatingIcon,
-   progressIcon: Icons.refresh,
-   progressIconSize: 40.0,
-   rotateProgress: true,
-   maxRotationAngle: 2 * pi,
-   ```
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `requireLongPressBeforePull` | `bool` | `false` | Locks dragging until a long press completes. |
+| `longPressDuration` | `Duration` | `500ms` | Holding duration needed to unlock swipe gesture. |
+| `longPressProgressBuilder` | `Widget Function(BuildContext, double)?` | `null` | Builder for custom holding indicator visual feedback. |
+| `enableShakeToCancel` | `bool` | `false` | Integrates `sensors_plus` to cancel drag on shaking the device. |
+| `hapticFeedback` | `bool` | `true` | Vibrates the device when crossing thresholds and triggering. |
 
-3. **Scaling Icon/Image**:
-   ```dart
-   progressIndicatorType: ProgressIndicatorType.scalingIcon,
-   progressIcon: Icons.lock,
-   // Or use an image:
-   progressImage: AssetImage('assets/icon.png'),
-   ```
+---
 
-4. **Fading Icon/Image**:
-   ```dart
-   progressIndicatorType: ProgressIndicatorType.fadingIcon,
-   progressIcon: Icons.security,
-   ```
+## 🔄 Migration Guide (v1.x to v2.x)
 
-5. **Custom Progress Widget**:
-   ```dart
-   progressIndicatorType: ProgressIndicatorType.custom,
-   progressBuilder: (progress) => CustomProgressWidget(
-     progress: progress,
-   ),
-   ```
+Version `2.x` modernizes gesture physics and resolves critical parameters that were previously silent no-ops:
 
-### Behavior Configuration
+1. **Horizontal Swipe physics**:
+   - Setting `enableHorizontalSwipe: true` and `swipeDirection: Axis.horizontal` now correctly tracks horizontal drag vectors instead of vertical vectors.
+   - Anchors left-to-right swipe with `left: true` and right-to-left swipe with `left: false`.
+2. **Strict Sensitivity Anchoring**:
+   - `pullSensitivityHeight` is now strictly enforced relative to the active screen edge. Dragging inside the middle of a screen will no longer intercept and trigger pull overlays.
+3. **Scroll Prevention**:
+   - `preventScrollingWhileDragging: true` correctly absorbs touch events during pull updates, preventing under-scroll jitter on listviews.
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `triggerHeight` | `double?` | Height required to trigger the action | `250.0` |
-| `pullSensitivityHeight` | `double?` | Area from the edge where pull gesture is detected | `250.0` |
-| `top` | `bool?` | Whether to place the trigger area at the top or bottom | `true` |
-| `showProgressIndicator` | `bool?` | Whether to show the progress indicator | `true` |
-| `animationDuration` | `Duration` | Duration of the pull animation | `300ms` |
-| `animationCurve` | `Curve` | Curve for the pull animation | `Curves.easeInOut` |
-| `dragThreshold` | `double` | Minimum drag distance to start the pull action | `10.0` |
-| `hapticFeedback` | `bool` | Enable haptic feedback when triggered | `true` |
-| `preventScrollingWhileDragging` | `bool` | Prevents content scrolling during pull action | `true` |
-| `enableHorizontalSwipe` | `bool` | Enable horizontal swipe support | `false` |
-| `swipeDirection` | `Axis` | The direction of the swipe gesture | `Axis.vertical` |
-
-## 📋 Topics Covered
-
-This package is ideal for:
-
-- `pull-to-reveal`
-- `pull-to-refresh`
-- `pull-to-access`
-- `swipe-gesture`
-- `trigger-actions`
-- `vertical-swipe`
-- `horizontal-swipe`
-- `secret-access`
-- `swipe-to-access`
-- `gesture-detection-flutter`
-- `material-3`
-- `adaptive-layout`
-
-## 🐛 Issue Reporting
-
-If you encounter any issues or have suggestions for improvements, please:
-
-1. Check the [existing issues](https://github.com/tejaspalyekar/release_to_trigger/issues) to see if your problem has already been reported
-2. If not, create a new issue with:
-   - A clear description of the problem
-   - Steps to reproduce the issue
-   - Expected behavior
-   - Actual behavior
-   - Screenshots or videos if applicable
-   - Your Flutter version and device information
-
-We appreciate your feedback and will address issues as quickly as possible!
+---
 
 ## ⭐ Show Your Support
 
-If you like `release_to_trigger`, please **star** the repository on GitHub, leave a review on PubDev, and feel free to [contribute](https://github.com/tejaspalyekar/release_to_trigger)! Your feedback helps us improve and add more exciting features!
+If you find `release_to_trigger` helpful, please star the repository on [GitHub](https://github.com/tejaspalyekar/release_to_trigger) and leave a like on [pub.dev](https://pub.dev/packages/release_to_trigger). We welcome community contributions and feature requests!
