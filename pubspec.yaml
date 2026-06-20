@@ -6,7 +6,7 @@ repository: https://github.com/tejaspalyekar/release_to_trigger
 issue_tracker: https://github.com/tejaspalyekar/release_to_trigger/issues
 documentation: https://github.com/tejaspalyekar/release_to_trigger/blob/main/README.md
 license: MIT
-funding: https://github.com/sponsors/tejaspalyekar # TODO: Update with your actual sponsors URL if needed
+
 topics:
   - pull-to-reveal
   - gesture-detection
