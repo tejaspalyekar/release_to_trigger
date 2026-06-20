@@ -8,14 +8,11 @@ documentation: https://github.com/tejaspalyekar/release_to_trigger/blob/main/REA
 license: MIT
 
 topics:
-  - pull-to-reveal
   - gesture-detection
-  - interactive-ui
-  - flutter-widgets
-  - animations
-  - gesture
-  - ux
   - pull-to-refresh
+  - flutter-widgets
+  - animation
+  - secret-access
   
 environment:
   sdk: '>=3.5.0 <4.0.0'
