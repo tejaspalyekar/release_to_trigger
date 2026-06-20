@@ -1,4 +1,4 @@
-## 2.1.0
+## 2.0.0
 
 ### New Features
 - **Named Constructor `ReleaseToTrigger.refresh`**: Dedicated constructor configured for pull-to-refresh with state holding until async Future completion.
