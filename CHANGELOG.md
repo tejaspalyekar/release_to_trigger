@@ -1,6 +1,7 @@
-## 2.0.0
+## 2.0.1
 
-### New Features
+### New Features & Visual Customizations
+- **Upgrade `sensors_plus` dependency**: Upgraded `sensors_plus` to version `^7.0.0` to support modern sensor API standards.
 - **Named Constructor `ReleaseToTrigger.refresh`**: Dedicated constructor configured for pull-to-refresh with state holding until async Future completion.
 - **Multi-Stage Triggers (`TriggerStage`)**: Supports threshold stages (e.g., halfway, threshold, overpull) with custom labels, callbacks (`onStageReached`), and custom `textStyle` configurations.
 - **Secure Combo Lock**: Added option to require pointer long-press hold (`requireLongPressBeforePull`) for a configured duration before dragging is unlocked. Includes glassmorphic radial overlay animations and custom builder support (`longPressProgressBuilder`).

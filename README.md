@@ -40,13 +40,13 @@ The user holds their thumb on the fingerprint scanner to disarm the lock, then s
 
 | Top Pull-Down (Standard) | Bottom Pull-Up | Horizontal Swipe-to-Reveal |
 |:---:|:---:|:---:|
-| <img src="screenshots/top_drag.gif" width="220px" /> | <img src="screenshots/bottom_up_drag.gif" width="220px" /> | <img src="screenshots/03_pull_reveal_demo.gif" width="220px" /> |
+| <img src="screenshots/top_drag.gif" width="220px" /> | <img src="screenshots/bottom_up_drag.gif" width="220px" /> | <img src="screenshots/04_horizontal_swipe_demo.gif" width="220px" /> |
 
 ### 📱 Real-World App Console Screens
 
-| 1. Locked Console | 2. Fingerprint Scanning | 3. Decrypted Vault |
-|:---:|:---:|:---:|
-| <img src="screenshots/1.png" width="240px" /> | <img src="screenshots/2.png" width="240px" /> | <img src="screenshots/3.png" width="240px" /> |
+| 1. Secret Files | 2. Quick Calculator |
+|:---:|:---:|
+| <img src="screenshots/1.png" width="240px" /> | <img src="screenshots/2.png" width="240px" /> |
 
 ---
 
@@ -56,7 +56,7 @@ Add the package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  release_to_trigger: ^2.1.0
+  release_to_trigger: ^2.0.1
 ```
 
 Import the package in your Dart code:
